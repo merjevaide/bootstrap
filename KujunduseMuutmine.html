@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 50px;
+        }
+        button{background-color: antiquewhite;
+        padding:10px;
+        border-radius:5px;}
+    </style>
+</head>
+
+<body>
+    <h1 id="pealkiri">Suur pealkiri, kujunduse muutmiseks</h1>
+    <p>Esimene lõik<p>
+    <p>Teine lõik<p>
+    <p>Kolmas lõik<p>
+
+<button type="button" onclick="document.getElementById('pealkiri').style.color='red'">Punane</button>
+<button type="button" onclick="document.getElementById('pealkiri').style.color='blue'">Sinine</button>
+<button type="button" onclick="document.getElementById('pealkiri').style.color='green'">Roheline</button>
+
+<br><br><button onclick="minuFunktsioon()">Muuda lõikude värvi</button><br><br>
+    <script>
+        var rgbVarv;
+        var kollektsioon = document.getElementsByTagName("p");
+        var n=kollektsioon.length;
+
+        function genVarv(){
+            var varvikood=Math.floor(Math.random()*256);
+            return varvikood;
+        }
+function genereeriRGBvarv(){
+    for(var i=0; i<n; i++){
+        rgbVarv='rgb('+genVarv()+','+genVarv()+','+genVarv()+')';
+        kollektsioon[i].style.color=rgbVarv;
+        document.body.style.backgroundColor=rgbVarv;
+    }
+}
+function minuFunktsioon(){
+    for(var j=0;j<10;j++){
+        setInterval(genereeriRGBvarv,3000);
+    }
+}
+    </script>
+</body>
+
+</html>
