@@ -22,28 +22,46 @@
 <button type="button" onclick="document.getElementById('pealkiri').style.color='blue'">Sinine</button>
 <button type="button" onclick="document.getElementById('pealkiri').style.color='green'">Roheline</button>
 
-<br><br><button onclick="minuFunktsioon()">Muuda lõikude värvi</button><br><br>
+<br /><br /><button onclick="minuFunktsioon2()">Muuda värve</button>
+    <button onclick="lopeta()">Stop</button><br /><br />
     <script>
-        var rgbVarv;
-        var kollektsioon = document.getElementsByTagName("p");
-        var n=kollektsioon.length;
+       let kollektsioon = document.getElementsByTagName("p");
+      let n = kollektsioon.length;
+      let interval;
+      let timesRun = 0;
+      function genVarv() {
+        return Math.floor(Math.random() * 256);
+      }
 
-        function genVarv(){
-            var varvikood=Math.floor(Math.random()*256);
-            return varvikood;
+      function genRGB() {
+        let rgbVarv =
+          "rgb(" + genVarv() + "," + genVarv() + "," + genVarv() + ")";
+        return rgbVarv;
+      }
+
+      function muudaVarve() {
+        for (var i = 0; i < n; i++) {
+          //iga element saab uue värvi
+          kollektsioon[i].style.color = genRGB();
         }
-function genereeriRGBvarv(){
-    for(var i=0; i<n; i++){
-        rgbVarv='rgb('+genVarv()+','+genVarv()+','+genVarv()+')';
-        kollektsioon[i].style.color=rgbVarv;
-        document.body.style.backgroundColor=rgbVarv;
-    }
-}
-function minuFunktsioon(){
-    for(var j=0;j<10;j++){
-        setInterval(genereeriRGBvarv,3000);
-    }
-}
+        document.body.style.backgroundColor = genRGB();
+      }
+
+      function minuFunktsioon() {
+        interval = setInterval(muudaVarve, 3000);
+      }
+      function minuFunktsioon2() {
+        let interval = setInterval(function () {
+          muudaVarve();
+          timesRun += 1;
+          if (timesRun === 10) {
+            clearInterval(interval);
+          }
+        }, 1000);
+      }
+      function lopeta() {
+        clearInterval(interval);
+      }
     </script>
 </body>
 
